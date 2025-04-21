@@ -49,7 +49,7 @@ class _Logo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Signup?!",
+            "Sign up!",
             textAlign: TextAlign.center,
             style: isSmallScreen
                 ? Theme.of(context).textTheme.headlineSmall
@@ -195,7 +195,6 @@ class __FormContentState extends State<_FormContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -207,7 +206,7 @@ class __FormContentState extends State<_FormContent> {
                     foregroundColor: Colors.teal,
                   ),
                   child: const Text(
-                    "Login",
+                    "Already have an Account?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,

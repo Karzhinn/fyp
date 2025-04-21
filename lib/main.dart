@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/SignupScreen.dart';
 import 'dart:async';
 import 'package:graduation_project/splash_screen.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(const MyApp());

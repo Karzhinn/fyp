@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/LoginScreen.dart';
+import 'package:graduation_project/HomeScreen.dart';
+import 'package:graduation_project/SignupScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
@@ -47,7 +50,7 @@ class _Logo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Welcome Back!",
+            "Sign in!",
             textAlign: TextAlign.center,
             style: isSmallScreen
                 ? Theme.of(context).textTheme.headlineSmall
@@ -178,11 +181,40 @@ class __FormContentState extends State<_FormContent> {
                   ),
                 ),
                 onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const GoogleBottomBar()),
+                    );
                   if (_formKey.currentState?.validate() ?? false) {
                     /// do something
+                    /// 
                   }
                 },
               ),
+            ),
+            _gap(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Signupscreen()),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.teal,
+                  ),
+                  child: const Text(
+                    "Create an Account?",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -192,3 +224,15 @@ class __FormContentState extends State<_FormContent> {
 
   Widget _gap() => const SizedBox(height: 16);
 }
+
+// class Loginscreen extends StatelessWidget {
+//   const Loginscreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Login Screen')),
+//       body: const Center(child: Text('Login Screen Content')),
+//     );
+//   }
+// }
