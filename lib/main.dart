@@ -20,37 +20,37 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+// class MyWidget extends StatefulWidget {
+//   const MyWidget({super.key});
 
-  @override
-  _MyWidgetState createState() => _MyWidgetState();
-}
+//   @override
+//   _MyWidgetState createState() => _MyWidgetState();
+// }
 
-class _MyWidgetState extends State<MyWidget> {
-  @override
-  void initState() {
-    super.initState();
-    // Set a delay of 3 seconds before navigating to the main screen
-    Future.delayed(Duration(seconds: 3), () {
-      // Navigate to HomeScreen after the delay
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Signupscreen()),
-      );
-    });
-  }
+// class _MyWidgetState extends State<MyWidget> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     // Set a delay of 3 seconds before navigating to the main screen
+//     Future.delayed(Duration(seconds: 3), () {
+//       // Navigate to HomeScreen after the delay
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (context) => Signupscreen()),
+//       );
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff3E3F5B),  // Optional, adjust according to your theme
-      body: Center(
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color(0xff3E3F5B),  // Optional, adjust according to your theme
+//       body: Center(
       
-      ),
-    );
-  }
-}
+//       ),
+//     );
+//   }
+// }
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

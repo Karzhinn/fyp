@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/LoginScreen.dart'; 
+import 'package:graduation_project/LoginScreen.dart';
+import 'package:graduation_project/SignupScreen.dart'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Loginscreen()), // Navigate to LoginScreen
+        MaterialPageRoute(builder: (context) => Signupscreen()), // Navigate to LoginScreen
       );
     });
   }
