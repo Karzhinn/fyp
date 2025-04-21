@@ -11,7 +11,7 @@ class Loginscreen extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      backgroundColor: Color(0xffE2E0C8), 
+      backgroundColor: Color(0xffDBD3D8), 
         body: Center(
             child: isSmallScreen
                 ? Column(
@@ -57,7 +57,7 @@ class _Logo extends StatelessWidget {
                 : Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(color: Colors.black),
+                    ?.copyWith(color: Color(0xffFEFAE0)),
           ),
         )
       ],
