@@ -91,36 +91,26 @@ class __FormContentState extends State<_FormContent> {
   }
 
   Future<void> _submitForm() async {
-    if (!_formKey.currentState!.validate()) return;
+  if (!_formKey.currentState!.validate()) return;
+  setState(() => _isLoading = true);
 
-    setState(() => _isLoading = true);
-    
-    try {
-      final authProvider = Provider.of<AppAuthProvider>(context, listen: false);
-      await authProvider.register(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-        fullName: _fullNameController.text.trim(),
-      );
-      
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message ?? 'Registration failed')),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
+  final auth = Provider.of<AppAuthProvider>(context, listen: false);
+  try {
+    await auth.register(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+      fullName: _fullNameController.text.trim(),
+    );
+    Navigator.pushReplacementNamed(context, '/home');
+  } on FirebaseAuthException catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(e.message ?? 'Registration failed')),
+    );
+  } finally {
+    setState(() => _isLoading = false);
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
