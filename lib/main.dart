@@ -1,17 +1,30 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/SignupScreen.dart';
-import 'package:graduation_project/splash_screen.dart';
+import 'package:graduation_project/Services/auth.provider.dart';
+import 'package:graduation_project/constants/colors.dart';
+import 'package:graduation_project/Screens/HomeScreen.dart';
+import 'package:graduation_project/Screens/splash_screen.dart';
+import 'package:graduation_project/Screens/LoginScreen.dart';
+import 'package:graduation_project/Screens/SignupScreen.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-class AppColors {
-  static const Color primary = Color(0xFF);
-  static const Color secondary = Color(0xFF);
-  static const Color background = Color(0xFFDBD3D8);
-  static const Color textPrimary = Color(0xFF223843);
-  static const Color textSecondary = Color(0xFFD77A61);
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
-  runApp(const MyApp());
+  // Initialize Firebase with the generated options
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppAuthProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Graduation Project',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
@@ -41,9 +55,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.background,
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
@@ -63,18 +77,16 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const SplashScreen(), // Correctly placed outside ThemeData
-    );
-  }
-}
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+      // Show splash immediately:
+      home: const SplashScreen(),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text("Welcome to the Home Screen")),
+      // Named routes for auth flow:
+      routes: {
+        '/login': (context) => const Loginscreen(),
+        '/signup': (context) => const Signupscreen(),
+        '/home': (context) => const HomeScreen(),
+      },
     );
   }
 }

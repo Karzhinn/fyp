@@ -1,7 +1,8 @@
-import 'package:graduation_project/LoginScreen.dart';
-import 'package:graduation_project/SignupScreen.dart'; 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graduation_project/Screens/LoginScreen.dart';
+import 'package:graduation_project/Screens/SignupScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,33 +15,41 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
-    // Navigate after 2 seconds (adjust duration as needed)
+
+    // A quick debug print to confirm build is happening:
+    debugPrint('🔔 SplashScreen.initState called');
+
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Loginscreen()),
-      );
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.pushReplacementNamed(context, '/login');
+      }
     });
   }
 
   @override
   void dispose() {
+    // restore UI chrome if needed
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Another debug print to confirm build()
+    debugPrint('🔔 SplashScreen.build called');
+
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF283618),
-              // Color(0xFFDDA15E),
-              Color(0xFFFEFAE0),
+              Color(0xFF283618), // dark green
+              Color(0xFFFEFAE0), // off-white
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -50,14 +59,10 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image.asset(
-              //   'assets/app_logo.png', // Your logo path
-              //   width: 150,
-              //   height: 150,
-              // ),
               const SizedBox(height: 30),
               const Text(
                 'Mental Health Services & Support',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,

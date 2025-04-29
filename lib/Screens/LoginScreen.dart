@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/LoginScreen.dart';
-import 'package:graduation_project/HomeScreen.dart';
-import 'package:graduation_project/SignupScreen.dart';
+import 'package:graduation_project/Screens/LoginScreen.dart';
+import 'package:graduation_project/Screens/HomeScreen.dart';
+import 'package:graduation_project/Screens/SignupScreen.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
@@ -225,14 +225,14 @@ class __FormContentState extends State<_FormContent> {
   Widget _gap() => const SizedBox(height: 16);
 }
 
-// class Loginscreen extends StatelessWidget {
-//   const Loginscreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Login Screen')),
-//       body: const Center(child: Text('Login Screen Content')),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Login')),
+      body: const Center(child: Text('Login Screen')),
+    );
+  }
+}
