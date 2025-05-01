@@ -5,6 +5,7 @@ import 'package:graduation_project/constants/colors.dart';
 import 'package:graduation_project/Screens/HomeScreen.dart';
 import 'package:graduation_project/Screens/splash_screen.dart';
 import 'package:graduation_project/Screens/LoginScreen.dart';
+import 'package:graduation_project/Screens/ProfilePage.dart';
 import 'package:graduation_project/Screens/SignupScreen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -86,6 +87,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const Loginscreen(),
         '/signup': (context) => const Signupscreen(),
         '/home': (context) => const HomeScreen(),
+        '/profile': (context) => const ProfilePage()
       },
     );
   }

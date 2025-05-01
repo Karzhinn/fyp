@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/Screens/ProfilePage.dart';
 
-class GoogleBottomBar extends StatefulWidget {
-  const GoogleBottomBar({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<GoogleBottomBar> createState() => _GoogleBottomBarState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _GoogleBottomBarState extends State<GoogleBottomBar> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
     Text("Home"),
     Text("Likes"),
     Text("Search"),
-    Text("Profile"),
+    ProfilePage(),
   ];
 
   @override
@@ -54,14 +55,14 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: const Center(child: Text('Welcome to Home Screen')),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Home')),
+//       body: const Center(child: Text('Welcome to Home Screen')),
+//     );
+//   }
+// }
