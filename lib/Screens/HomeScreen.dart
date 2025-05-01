@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/Screens/JournalPage.dart';
 import 'package:graduation_project/Screens/ProfilePage.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = const [
     Text("Home"),
-    Text("Likes"),
+    JournalPage(),
     Text("Search"),
     ProfilePage(),
   ];
