@@ -82,6 +82,8 @@ class __FormContentState extends State<_FormContent> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
 
+  String _userType = 'user'; // default
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -91,26 +93,26 @@ class __FormContentState extends State<_FormContent> {
   }
 
   Future<void> _submitForm() async {
-  if (!_formKey.currentState!.validate()) return;
-  setState(() => _isLoading = true);
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isLoading = true);
 
-  final auth = Provider.of<AppAuthProvider>(context, listen: false);
-  try {
-    await auth.register(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-      fullName: _fullNameController.text.trim(),
-    );
-    Navigator.pushReplacementNamed(context, '/home');
-  } on FirebaseAuthException catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(e.message ?? 'Registration failed')),
-    );
-  } finally {
-    setState(() => _isLoading = false);
+    final auth = Provider.of<AppAuthProvider>(context, listen: false);
+    try {
+      await auth.register(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+        fullName: _fullNameController.text.trim(),
+        userType: _userType, // pass userType here
+      );
+      Navigator.pushReplacementNamed(context, '/home');
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? 'Registration failed')),
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,10 +134,8 @@ class __FormContentState extends State<_FormContent> {
                   borderSide: BorderSide(color: Colors.teal, width: 2),
                 ),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) return 'Please enter your full name';
-                return null;
-              },
+              validator: (value) =>
+                  value == null || value.isEmpty ? 'Please enter your full name' : null,
             ),
             const SizedBox(height: 16),
             TextFormField(
@@ -180,6 +180,26 @@ class __FormContentState extends State<_FormContent> {
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+
+            // User type selection
+            DropdownButtonFormField<String>(
+              value: _userType,
+              onChanged: (value) => setState(() => _userType = value!),
+              items: const [
+                DropdownMenuItem(value: 'user', child: Text('User')),
+                DropdownMenuItem(value: 'therapist', child: Text('Therapist')),
+              ],
+              decoration: const InputDecoration(
+                labelText: 'Sign up as',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.teal, width: 2),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 24),
             SizedBox(
               width: 150,

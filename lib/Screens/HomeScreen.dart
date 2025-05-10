@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/Screens/JournalPage.dart';
 import 'package:graduation_project/Screens/ProfilePage.dart';
+import 'package:graduation_project/Screens/TherapistsListScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = const [
     Text("Home"),
     JournalPage(),
-    Text("Search"),
+    TherapistsListScreen(),
     ProfilePage(),
   ];
 
@@ -55,15 +56,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Home')),
-//       body: const Center(child: Text('Welcome to Home Screen')),
-//     );
-//   }
-// }

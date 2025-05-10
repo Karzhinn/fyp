@@ -8,27 +8,34 @@ class AppAuthProvider with ChangeNotifier {
 
   /// Create a new account (email/password + store fullName in Firestore)
   Future<UserCredential> register({
-    required String email,
-    required String password,
-    required String fullName,
-  }) async {
-    // 1) Create user in Firebase Auth
-    UserCredential credential = await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+  required String email,
+  required String password,
+  required String fullName,
+  required String userType, // "user" or "therapist"
+}) async {
 
-    // 2) Save additional profile info
-    await _firestore.collection('users').doc(credential.user!.uid).set({
-      'uid': credential.user!.uid,
-      'email': email,
-      'fullName': fullName,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+  // Create the account in Firebase Auth
+  UserCredential credential = await _auth.createUserWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
 
-    notifyListeners();
-    return credential;
-  }
+  // Select collection based on userType
+  final collectionName = userType == 'therapist' ? 'therapists' : 'users';
+
+  // Save user info to the appropriate Firestore collection
+  await _firestore.collection(collectionName).doc(credential.user!.uid).set({
+    'uid': credential.user!.uid,
+    'email': email,
+    'fullName': fullName,
+    'userType': userType,
+    'createdAt': FieldValue.serverTimestamp(),
+  });
+
+  notifyListeners();
+  return credential;
+}
+
 
   /// Sign in an existing user
   Future<UserCredential> signIn({
